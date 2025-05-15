@@ -22,9 +22,30 @@ class AFP_GAM415_McGuffeyProjectile : public AActor
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	UProjectileMovementComponent* ProjectileMovement;
 
+	// Mesh and material
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent* ballMesh;
+
+	UPROPERTY(EditAnywhere)
+		UMaterial* baseMat;
+
+	// Random color and projectile materials
+	UPROPERTY()
+		FLinearColor randColor;
+
+	UPROPERTY(EditAnywhere)
+		UMaterialInterface* projMat;
+
+	UPROPERTY()
+		UMaterialInstanceDynamic* dmiMat;
+
 public:
 	AFP_GAM415_McGuffeyProjectile();
 
+protected:
+	virtual void BeginPlay();
+
+public:
 	/** called when projectile hits something */
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
