@@ -8,6 +8,7 @@
 
 class USphereComponent;
 class UProjectileMovementComponent;
+class UNiagaraSystem;
 
 UCLASS(config=Game)
 class AFP_GAM415_McGuffeyProjectile : public AActor
@@ -38,6 +39,10 @@ class AFP_GAM415_McGuffeyProjectile : public AActor
 
 	UPROPERTY()
 		UMaterialInstanceDynamic* dmiMat;
+
+	// Create projectile particle color
+	UPROPERTY(EditAnywhere)
+		UNiagaraSystem* colorP;
 
 public:
 	AFP_GAM415_McGuffeyProjectile();

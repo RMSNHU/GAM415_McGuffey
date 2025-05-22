@@ -6,6 +6,8 @@
 #include "Components/SphereComponent.h"
 #include "Components/DecalComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
 
 
 AFP_GAM415_McGuffeyProjectile::AFP_GAM415_McGuffeyProjectile() 
@@ -69,6 +71,18 @@ void AFP_GAM415_McGuffeyProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* 
 	// Spawn decal if it hits something
 	if (OtherActor != nullptr)
 	{
+		// Check if colorP is valid
+		if (colorP)
+		{
+			// Create new particle component and set it to RandomColor
+			UNiagaraComponent* particleComp = UNiagaraFunctionLibrary::SpawnSystemAttached(colorP, HitComp, NAME_None, FVector(-20.f, 0.f, 0.f), FRotator(0.f), EAttachLocation::KeepRelativeOffset, true);
+			particleComp->SetNiagaraVariableLinearColor(FString("RandomColor"), randColor);
+
+			// Destroy projectile
+			ballMesh->DestroyComponent();
+			CollisionComp->BodyInstance.SetCollisionProfileName("NoCollision");
+		}
+
 		// Get random frame number
 		float frameNum = UKismetMathLibrary::RandomFloatInRange(0.f, 3.f);
 

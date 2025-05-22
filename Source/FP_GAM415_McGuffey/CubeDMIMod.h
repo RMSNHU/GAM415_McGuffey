@@ -7,6 +7,8 @@
 #include "Components/BoxComponent.h"
 #include "CubeDMIMod.generated.h"
 
+class UNiagaraSystem;
+
 UCLASS()
 class FP_GAM415_MCGUFFEY_API ACubeDMIMod : public AActor
 {
@@ -24,6 +26,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	// Create mesh and materials
+
 	UPROPERTY(EditAnywhere)
 		UBoxComponent* boxComp;
 
@@ -36,6 +40,12 @@ public:
 	UPROPERTY()
 		UMaterialInstanceDynamic* dmiMat;
 
+	// Create Niagara confetti color
+	UPROPERTY(EditAnywhere)
+		UNiagaraSystem* colorP;
+
+
+	// Create overlap trigger
 	UFUNCTION()
 		void onOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 };
