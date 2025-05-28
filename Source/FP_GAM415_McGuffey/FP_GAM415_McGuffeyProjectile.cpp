@@ -8,6 +8,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
+#include "PerlinProc.h"
 
 
 AFP_GAM415_McGuffeyProjectile::AFP_GAM415_McGuffeyProjectile() 
@@ -93,5 +94,15 @@ void AFP_GAM415_McGuffeyProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* 
 		// Set material instance properties
 		MatInstance->SetVectorParameterValue("Color", randColor);
 		MatInstance->SetScalarParameterValue("Frame", frameNum);
+
+		// Digging
+		// Get proc terrain
+		APerlinProc* procTerrain = Cast<APerlinProc>(OtherActor);
+
+		// Check if projectiles hits something
+		if (procTerrain)
+		{
+			procTerrain->AlterMesh(Hit.ImpactPoint);
+		}
 	}
 }
