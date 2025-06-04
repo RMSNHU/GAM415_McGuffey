@@ -5,7 +5,7 @@
 #include "ProceduralMeshComponent.h"
 #include "KismetProceduralMeshLibrary.h"
 
-// Sets default values
+// Sets default values  
 APerlinProc::APerlinProc()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
